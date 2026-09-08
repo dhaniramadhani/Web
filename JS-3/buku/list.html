@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SIMPUS-Mini | Daftar Buku</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+
+<body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+
+        <div class="relative max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+
+            <!-- Logo -->
+            <h1 class="text-xl font-bold text-indigo-600">
+                SIMPUS-Mini
+            </h1>
+
+
+            <!-- Hamburger -->
+            <input
+                type="checkbox"
+                id="nav-toggle"
+                class="peer sr-only">
+
+
+            <label
+                for="nav-toggle"
+                class="md:hidden text-2xl cursor-pointer text-slate-700 select-none">
+                ☰
+            </label>
+
+
+            <!-- Navbar -->
+            <nav class="
+                hidden
+                peer-checked:block
+
+                absolute
+                top-full
+                left-0
+                w-full
+
+                bg-white
+                border-b
+                border-slate-200
+                shadow-md
+                p-4
+
+                md:block
+                md:static
+                md:w-auto
+                md:border-0
+                md:shadow-none
+                md:p-0
+            ">
+
+                <ul class="flex flex-col gap-2 md:flex-row md:items-center">
+
+                    <li>
+                        <a
+                            href="../index.html"
+                            class="
+                                block
+                                px-4
+                                py-2
+                                rounded-lg
+                                text-slate-600
+                                hover:bg-indigo-50
+                                hover:text-indigo-600
+                                transition
+                            ">
+                            Beranda
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a
+                            href="list.html"
+                            class="
+                                block
+                                px-4
+                                py-2
+                                rounded-lg
+                                bg-indigo-50
+                                text-indigo-600
+                                font-medium
+                            ">
+                            Daftar Buku
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a
+                            href="tambah.html"
+                            class="
+                                block
+                                px-4
+                                py-2
+                                rounded-lg
+                                text-slate-600
+                                hover:bg-indigo-50
+                                hover:text-indigo-600
+                                transition
+                            ">
+                            Tambah Buku
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a
+                            href="../anggota/list.html"
+                            class="
+                                block
+                                px-4
+                                py-2
+                                rounded-lg
+                                text-slate-600
+                                hover:bg-indigo-50
+                                hover:text-indigo-600
+                                transition
+                            ">
+                            Daftar Anggota
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+    <main class="w-full max-w-6xl mx-auto px-5 py-10 flex-1">
+
+        <section>
+
+
+            <!-- JUDUL + BUTTON -->
+            <div class="
+                flex
+                flex-col
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+                gap-4
+                mb-6
+            ">
+
+                <div>
+
+                    <h2 class="text-2xl font-bold">
+                        Daftar Buku
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        Kelola data buku perpustakaan
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="tambah.html"
+                    class="
+                        inline-flex
+                        justify-center
+                        items-center
+
+                        bg-indigo-600
+                        hover:bg-indigo-700
+
+                        text-white
+                        font-medium
+
+                        px-4
+                        py-2
+
+                        rounded-lg
+                        transition
+                    ">
+                    + Tambah Buku
+                </a>
+
+            </div>
+
+
+
+            <!-- =========================
+                 TABLE RESPONSIVE
+            ========================== -->
+
+            <div class="
+                overflow-x-auto
+                bg-white
+                border
+                border-slate-200
+                rounded-xl
+                shadow-sm
+            ">
+
+                <table class="w-full min-w-[750px]">
+
+
+                    <!-- HEADER TABLE -->
+                    <thead class="bg-slate-50">
+
+                        <tr>
+
+                            <th class="
+                                text-left
+                                px-5
+                                py-4
+                                text-xs
+                                font-semibold
+                                text-slate-500
+                                uppercase
+                            ">
+                                No
+                            </th>
+
+
+                            <th class="
+                                text-left
+                                px-5
+                                py-4
+                                text-xs
+                                font-semibold
+                                text-slate-500
+                                uppercase
+                            ">
+                                Judul
+                            </th>
+
+
+                            <th class="
+                                text-left
+                                px-5
+                                py-4
+                                text-xs
+                                font-semibold
+                                text-slate-500
+                                uppercase
+                            ">
+                                Penulis
+                            </th>
+
+
+                            <th class="
+                                text-left
+                                px-5
+                                py-4
+                                text-xs
+                                font-semibold
+                                text-slate-500
+                                uppercase
+                            ">
+                                Tahun Terbit
+                            </th>
+
+
+                            <th class="
+                                text-left
+                                px-5
+                                py-4
+                                text-xs
+                                font-semibold
+                                text-slate-500
+                                uppercase
+                            ">
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- ISI TABLE -->
+                    <tbody class="divide-y divide-slate-100">
+
+
+                        <!-- BUKU 1 -->
+                        <tr class="hover:bg-slate-50 transition">
+
+                            <td class="px-5 py-4 text-slate-600">
+                                1
+                            </td>
+
+                            <td class="px-5 py-4 font-medium">
+                                Laskar Pelangi
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                Andrea Hirata
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                2005
+                            </td>
+
+                            <td class="px-5 py-4">
+
+                                <div class="flex gap-2">
+
+                                    <button class="
+                                        bg-sky-500
+                                        hover:bg-sky-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Edit
+                                    </button>
+
+
+                                    <button class="
+                                        bg-red-500
+                                        hover:bg-red-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Hapus
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- BUKU 2 -->
+                        <tr class="hover:bg-slate-50 transition">
+
+                            <td class="px-5 py-4 text-slate-600">
+                                2
+                            </td>
+
+                            <td class="px-5 py-4 font-medium">
+                                Bumi Manusia
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                Pramoedya Ananta Toer
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                1980
+                            </td>
+
+                            <td class="px-5 py-4">
+
+                                <div class="flex gap-2">
+
+                                    <button class="
+                                        bg-sky-500
+                                        hover:bg-sky-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Edit
+                                    </button>
+
+
+                                    <button class="
+                                        bg-red-500
+                                        hover:bg-red-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Hapus
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- BUKU 3 -->
+                        <tr class="hover:bg-slate-50 transition">
+
+                            <td class="px-5 py-4 text-slate-600">
+                                3
+                            </td>
+
+                            <td class="px-5 py-4 font-medium">
+                                Negeri 5 Menara
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                Ahmad Fuadi
+                            </td>
+
+                            <td class="px-5 py-4 text-slate-600">
+                                2009
+                            </td>
+
+                            <td class="px-5 py-4">
+
+                                <div class="flex gap-2">
+
+                                    <button class="
+                                        bg-sky-500
+                                        hover:bg-sky-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Edit
+                                    </button>
+
+
+                                    <button class="
+                                        bg-red-500
+                                        hover:bg-red-600
+                                        text-white
+                                        text-sm
+                                        font-medium
+                                        px-3
+                                        py-1.5
+                                        rounded-lg
+                                        transition
+                                    ">
+                                        Hapus
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="
+        bg-white
+        border-t
+        border-slate-200
+        text-center
+        text-sm
+        text-slate-500
+        py-5
+    ">
+
+        <p>
+            &copy; 2026 SIMPUS-Mini — Jobsheet 3
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
