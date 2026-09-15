@@ -1,14 +1,19 @@
 function initNavToggle() {
     const toggleBtn = document.getElementById("nav-toggle-btn");
-    const nav = document.querySelector("header nav");
+    const nav = document.getElementById("main-nav");
 
-    if (!toggleBtn || !nav) return;
+    if (!toggleBtn || !nav) {
+        return;
+    }
 
     toggleBtn.addEventListener("click", function () {
         nav.classList.toggle("hidden");
 
-        const terbuka = !nav.classList.contains("hidden");
-        toggleBtn.setAttribute("aria-expanded", String(terbuka));
+        if (nav.classList.contains("hidden")) {
+            toggleBtn.setAttribute("aria-expanded", "false");
+        } else {
+            toggleBtn.setAttribute("aria-expanded", "true");
+        }
     });
 }
 
@@ -17,10 +22,12 @@ function initTableFilter() {
     const searchInput = document.getElementById("search-input");
     const table = document.querySelector(".table-responsive table");
 
-    if (!searchInput || !table) return;
+    if (!searchInput || !table) {
+        return;
+    }
 
     searchInput.addEventListener("keyup", function () {
-        const keyword = searchInput.value.toLowerCase().trim();
+        const keyword = searchInput.value.toLowerCase();
         const rows = table.querySelectorAll("tbody tr");
 
         rows.forEach(function (row) {
@@ -40,26 +47,31 @@ function initHapusConfirm() {
     const tombolHapus = document.querySelectorAll(".btn-hapus");
 
     tombolHapus.forEach(function (button) {
+
         button.addEventListener("click", function () {
             const row = button.closest("tr");
 
-            if (!row) return;
+            if (!row) {
+                return;
+            }
 
             const cells = row.querySelectorAll("td");
 
-            const namaData =
-                cells.length > 1
-                    ? cells[1].textContent.trim()
-                    : "data ini";
+            let namaData = "data ini";
+
+            if (cells.length > 1) {
+                namaData = cells[1].textContent.trim();
+            }
 
             const yakin = confirm(
-                `Yakin ingin menghapus "${namaData}"?`
+                'Yakin ingin menghapus "' + namaData + '"?'
             );
 
             if (yakin) {
                 row.remove();
             }
         });
+
     });
 }
 
@@ -96,7 +108,9 @@ function hapusError(input) {
 function initValidasiForm() {
     const form = document.getElementById("form-tambah");
 
-    if (!form) return;
+    if (!form) {
+        return;
+    }
 
     form.addEventListener("submit", function (event) {
         let valid = true;
@@ -113,11 +127,14 @@ function initValidasiForm() {
         ];
 
         fieldWajib.forEach(function (namaField) {
+
             const input = form.querySelector(
-                `[name="${namaField}"]`
+                '[name="' + namaField + '"]'
             );
 
-            if (!input) return;
+            if (!input) {
+                return;
+            }
 
             if (input.value.trim() === "") {
                 tampilkanError(
@@ -129,13 +146,19 @@ function initValidasiForm() {
             } else {
                 hapusError(input);
             }
+
         });
 
 
-        const tahun = form.querySelector("[name='tahun']");
+        const tahun = form.querySelector(
+            '[name="tahun"]'
+        );
 
         if (tahun) {
-            const nilaiTahun = parseInt(tahun.value, 10);
+            const nilaiTahun = parseInt(
+                tahun.value,
+                10
+            );
 
             if (
                 isNaN(nilaiTahun) ||
@@ -154,10 +177,15 @@ function initValidasiForm() {
         }
 
 
-        const stok = form.querySelector("[name='stok']");
+        const stok = form.querySelector(
+            '[name="stok"]'
+        );
 
         if (stok) {
-            const nilaiStok = parseInt(stok.value, 10);
+            const nilaiStok = parseInt(
+                stok.value,
+                10
+            );
 
             if (
                 stok.value.trim() === "" ||
@@ -182,12 +210,16 @@ function initValidasiForm() {
         }
 
 
-        const noHp = form.querySelector("[name='noHp']");
+        const noHp = form.querySelector(
+            '[name="noHp"]'
+        );
 
         if (
             noHp &&
             noHp.value.trim() !== "" &&
-            !/^[0-9]{10,15}$/.test(noHp.value.trim())
+            !/^[0-9]{10,15}$/.test(
+                noHp.value.trim()
+            )
         ) {
             tampilkanError(
                 noHp,
@@ -203,6 +235,7 @@ function initValidasiForm() {
         }
     });
 }
+
 
 document.addEventListener(
     "DOMContentLoaded",
