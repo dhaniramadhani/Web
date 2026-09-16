@@ -47,7 +47,6 @@ function initHapusConfirm() {
     const tombolHapus = document.querySelectorAll(".btn-hapus");
 
     tombolHapus.forEach(function (button) {
-
         button.addEventListener("click", function () {
             const row = button.closest("tr");
 
@@ -71,7 +70,6 @@ function initHapusConfirm() {
                 row.remove();
             }
         });
-
     });
 }
 
@@ -105,7 +103,7 @@ function hapusError(input) {
 }
 
 
-function initValidasiForm() {
+function initValidasiBuku() {
     const form = document.getElementById("form-tambah");
 
     if (!form) {
@@ -115,50 +113,52 @@ function initValidasiForm() {
     form.addEventListener("submit", function (event) {
         let valid = true;
 
-        const fieldWajib = [
-            "judul",
-            "penulis",
-            "penerbit",
-            "kategori",
-            "noAnggota",
-            "nama",
-            "alamat",
-            "noHp"
-        ];
+        const judul = form.querySelector('[name="judul"]');
+        const penulis = form.querySelector('[name="penulis"]');
+        const penerbit = form.querySelector('[name="penerbit"]');
+        const tahun = form.querySelector('[name="tahun"]');
+        const stok = form.querySelector('[name="stok"]');
+        const kategori = form.querySelector('[name="kategori"]');
 
-        fieldWajib.forEach(function (namaField) {
 
-            const input = form.querySelector(
-                '[name="' + namaField + '"]'
+        if (judul && judul.value.trim() === "") {
+            tampilkanError(
+                judul,
+                "Judul buku wajib diisi."
             );
 
-            if (!input) {
-                return;
-            }
-
-            if (input.value.trim() === "") {
-                tampilkanError(
-                    input,
-                    "Field ini wajib diisi."
-                );
-
-                valid = false;
-            } else {
-                hapusError(input);
-            }
-
-        });
+            valid = false;
+        } else if (judul) {
+            hapusError(judul);
+        }
 
 
-        const tahun = form.querySelector(
-            '[name="tahun"]'
-        );
+        if (penulis && penulis.value.trim() === "") {
+            tampilkanError(
+                penulis,
+                "Penulis wajib diisi."
+            );
+
+            valid = false;
+        } else if (penulis) {
+            hapusError(penulis);
+        }
+
+
+        if (penerbit && penerbit.value.trim() === "") {
+            tampilkanError(
+                penerbit,
+                "Penerbit wajib diisi."
+            );
+
+            valid = false;
+        } else if (penerbit) {
+            hapusError(penerbit);
+        }
+
 
         if (tahun) {
-            const nilaiTahun = parseInt(
-                tahun.value,
-                10
-            );
+            const nilaiTahun = parseInt(tahun.value, 10);
 
             if (
                 isNaN(nilaiTahun) ||
@@ -177,15 +177,8 @@ function initValidasiForm() {
         }
 
 
-        const stok = form.querySelector(
-            '[name="stok"]'
-        );
-
         if (stok) {
-            const nilaiStok = parseInt(
-                stok.value,
-                10
-            );
+            const nilaiStok = parseInt(stok.value, 10);
 
             if (
                 stok.value.trim() === "" ||
@@ -210,13 +203,125 @@ function initValidasiForm() {
         }
 
 
-        const noHp = form.querySelector(
-            '[name="noHp"]'
-        );
+        if (kategori && kategori.value === "") {
+            tampilkanError(
+                kategori,
+                "Kategori wajib dipilih."
+            );
 
-        if (
-            noHp &&
-            noHp.value.trim() !== "" &&
+            valid = false;
+        } else if (kategori) {
+            hapusError(kategori);
+        }
+
+
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+}
+
+
+function initFilterAnggota() {
+    const searchInput =
+        document.getElementById("search-anggota");
+
+    const table =
+        document.getElementById("tabel-anggota");
+
+    if (!searchInput || !table) {
+        return;
+    }
+
+    searchInput.addEventListener("keyup", function () {
+        const keyword =
+            searchInput.value.toLowerCase();
+
+        const rows =
+            table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            const text =
+                row.textContent.toLowerCase();
+
+            if (text.includes(keyword)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+}
+
+
+function initValidasiAnggota() {
+    const form =
+        document.getElementById("form-anggota");
+
+    if (!form) {
+        return;
+    }
+
+    form.addEventListener("submit", function (event) {
+        let valid = true;
+
+        const noAnggota =
+            document.getElementById("noAnggota");
+
+        const nama =
+            document.getElementById("nama");
+
+        const alamat =
+            document.getElementById("alamat");
+
+        const noHp =
+            document.getElementById("noHp");
+
+
+        if (noAnggota.value.trim() === "") {
+            tampilkanError(
+                noAnggota,
+                "No. anggota wajib diisi."
+            );
+
+            valid = false;
+        } else {
+            hapusError(noAnggota);
+        }
+
+
+        if (nama.value.trim() === "") {
+            tampilkanError(
+                nama,
+                "Nama anggota wajib diisi."
+            );
+
+            valid = false;
+        } else {
+            hapusError(nama);
+        }
+
+
+        if (alamat.value.trim() === "") {
+            tampilkanError(
+                alamat,
+                "Alamat wajib diisi."
+            );
+
+            valid = false;
+        } else {
+            hapusError(alamat);
+        }
+
+
+        if (noHp.value.trim() === "") {
+            tampilkanError(
+                noHp,
+                "No. HP wajib diisi."
+            );
+
+            valid = false;
+        } else if (
             !/^[0-9]{10,15}$/.test(
                 noHp.value.trim()
             )
@@ -227,6 +332,8 @@ function initValidasiForm() {
             );
 
             valid = false;
+        } else {
+            hapusError(noHp);
         }
 
 
@@ -243,6 +350,9 @@ document.addEventListener(
         initNavToggle();
         initTableFilter();
         initHapusConfirm();
-        initValidasiForm();
+        initValidasiBuku();
+
+        initFilterAnggota();
+        initValidasiAnggota();
     }
 );
