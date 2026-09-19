@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SIMPUS-Mini | Peminjaman</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+
+        <div class="relative w-full max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+
+            <a href="index.html" class="text-xl font-bold text-indigo-600">
+                SIMPUS-Mini
+            </a>
+
+            <button
+                type="button"
+                id="nav-toggle-btn"
+                aria-expanded="false"
+                class="md:hidden text-2xl text-slate-700">
+                ☰
+            </button>
+
+            <nav
+                id="main-nav"
+                class="hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-md p-4
+                       md:block md:static md:w-auto md:border-0 md:shadow-none md:p-0">
+
+                <ul class="flex flex-col gap-2 md:flex-row md:items-center">
+
+                    <li>
+                        <a href="index.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-indigo-50">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="buku/list.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-indigo-50">
+                            Buku
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="anggota/list.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-indigo-50">
+                            Anggota
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="peminjaman.html" class="block px-4 py-2 rounded-lg bg-indigo-50 text-indigo-600 font-medium">
+                            Peminjaman
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="pengembalian.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-indigo-50">
+                            Pengembalian
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="riwayat.html" class="block px-4 py-2 rounded-lg text-slate-600 hover:bg-indigo-50">
+                            Riwayat
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="login.html" class="block px-4 py-2 rounded-lg text-red-600 hover:bg-red-50">
+                            Logout
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="w-full max-w-3xl mx-auto px-5 py-10 flex-1">
+
+        <div class="mb-6">
+
+            <p class="text-sm font-medium text-indigo-600 mb-1">
+                Transaksi
+            </p>
+
+            <h2 class="text-2xl md:text-3xl font-bold">
+                Peminjaman Buku
+            </h2>
+
+            <p class="text-slate-500 mt-2">
+                Pilih anggota dan buku yang akan dipinjam.
+            </p>
+
+        </div>
+
+
+        <div
+            id="loading-peminjaman"
+            class="hidden mb-5 rounded-xl bg-indigo-50 border border-indigo-100 px-4 py-3 text-sm text-indigo-600">
+            Memuat data anggota dan buku...
+        </div>
+
+
+        <div
+            id="pesan-peminjaman"
+            class="hidden">
+        </div>
+
+
+        <form
+            id="form-peminjaman"
+            class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+
+            <div class="mb-5">
+
+                <label
+                    for="pilih-anggota"
+                    class="block text-sm font-semibold text-slate-700 mb-2">
+                    Anggota
+                </label>
+
+                <select
+                    id="pilih-anggota"
+                    class="w-full border border-slate-300 rounded-xl px-4 py-3 bg-white outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
+
+                    <option value="">
+                        Pilih anggota
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="mb-5">
+
+                <label
+                    for="pilih-buku"
+                    class="block text-sm font-semibold text-slate-700 mb-2">
+                    Buku
+                </label>
+
+                <select
+                    id="pilih-buku"
+                    class="w-full border border-slate-300 rounded-xl px-4 py-3 bg-white outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
+
+                    <option value="">
+                        Pilih buku
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+
+                <div>
+
+                    <label
+                        for="tanggal-pinjam"
+                        class="block text-sm font-semibold text-slate-700 mb-2">
+                        Tanggal Pinjam
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tanggal-pinjam"
+                        class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        for="tanggal-kembali"
+                        class="block text-sm font-semibold text-slate-700 mb-2">
+                        Tanggal Kembali
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tanggal-kembali"
+                        class="w-full border border-slate-300 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
+
+                </div>
+
+            </div>
+
+
+            <div class="flex justify-end pt-5 border-t border-slate-100">
+
+                <button
+                    type="submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2.5 rounded-xl">
+                    Simpan Peminjaman
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <footer class="border-t border-slate-200 text-center text-sm text-slate-400 py-5">
+        &copy; 2026 SIMPUS-Mini — Jobsheet 6
+    </footer>
+
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/transaksi.js"></script>
+
+</body>
+
+</html>

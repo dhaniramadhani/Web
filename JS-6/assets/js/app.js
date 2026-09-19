@@ -28,7 +28,6 @@ function initTableFilter() {
 
     searchInput.addEventListener("keyup", function () {
         const keyword = searchInput.value.toLowerCase();
-
         const rows = table.querySelectorAll("tbody tr");
 
         rows.forEach(function (row) {
@@ -107,7 +106,9 @@ function hapusError(input) {
 
 
 function initValidasiForm() {
-    const form = document.getElementById("form-tambah");
+    const form =
+        document.getElementById("form-tambah") ||
+        document.getElementById("form-anggota");
 
     if (!form) {
         return;
