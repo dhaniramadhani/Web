@@ -1,12 +1,14 @@
 <?php
 
-$host = 'localhost';
-$port = '5432';
-$db   = 'simpus_mini';
-$user = 'postgres';
-$pass = '12345';
+$host = getenv('PGHOST') ?: 'localhost';
+$port = getenv('PGPORT') ?: '5432';
+$db   = getenv('PGDATABASE') ?: 'simpus_mini';
+$user = getenv('PGUSER') ?: 'postgres';
+$pass = getenv('PGPASSWORD') ?: '12345';
+
 
 try {
+
     $pdo = new PDO(
         "pgsql:host=$host;port=$port;dbname=$db",
         $user,
@@ -16,9 +18,12 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
+
 } catch (PDOException $e) {
+
     die(
         'Koneksi database gagal: ' .
         $e->getMessage()
     );
+
 }
